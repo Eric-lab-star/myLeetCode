@@ -54,6 +54,7 @@ func minDiffInBST(root *TreeNode) int {
 	return int(minDiff)
 
 }
+
 func inOrderTraversal(root *TreeNode, preValue *int, minDiff *int) {
 	if root == nil {
 		return
