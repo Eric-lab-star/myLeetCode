@@ -10,16 +10,14 @@ func main() {
 }
 
 func twoSum(nums []int, target int) []int {
-	ret := []int{}
+	s := make(map[int]int)
 
-	for i := 0; i < len(nums); i++ {
-		for j := 0; j < len(nums); j++ {
-
-			if nums[i]+nums[j] == target && i != j {
-				ret = []int{i, j}
-				return ret
-			}
+	for idx, val := range nums {
+		if pos, ok := s[target-val]; ok {
+			return []int{pos, idx}
 		}
+		s[val] = idx
+
 	}
-	return ret
+	return []int{}
 }
