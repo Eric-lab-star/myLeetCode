@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	input := []string{"ab", "a"}
+	input := []string{"1", "2"}
 	ret := longestCommonPrefix(input)
 	fmt.Println(ret)
 }
@@ -27,33 +27,26 @@ func NewPrefixTrie() *Trie {
 }
 
 func (t *Trie) Insert(word string) {
-
 	temp := t.Root
-
 	for _, el := range word {
-
 		charStr := string(el)
-
 		if _, ok := temp.Children[charStr]; !ok {
 			temp.Children[charStr] = &Node{
 				Value:    charStr,
 				Children: make(map[string]*Node),
 			}
 		}
-
 		temp = temp.Children[charStr]
 	}
 }
 
 func getMinStr(strs []string) string {
 	minStr := strs[0]
-
 	for _, el := range strs {
 		if len(string(el)) < len(minStr) {
 			minStr = string(el)
 		}
 	}
-
 	return minStr
 }
 
