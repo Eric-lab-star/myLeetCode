@@ -38,3 +38,8 @@ func isValid(s string) bool {
 	}
 	return true
 }
+
+/*
+* "[[" 일때 오류,
+*
+ */
