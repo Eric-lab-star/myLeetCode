@@ -2,48 +2,29 @@ package main
 
 import (
 	"fmt"
-	"math"
 )
 
 func main() {
-	digits := []int{1, 2, 4}
-	int := marshal(digits)
-	fmt.Println(int)
-	upperInt := unmarshal(int + 1)
-	fmt.Println(upperInt)
+	input := []int{2}
+	fmt.Printf("input %v\n", input)
+	output := plusOne(input)
+	fmt.Printf("output %v\n", output)
 }
 
 func plusOne(digits []int) []int {
-	return unmarshal(marshal(digits) + 1)
-
-}
-
-func marshal(digits []int) int {
-	var length = len(digits)
-	var inputInt int
-	for index, value := range digits {
-		stat := math.Pow(10, float64(length-index-1))
-		inputInt += value * int(stat)
-	}
-	return inputInt
-}
-
-func unmarshal(number int) []int {
-	var out []int
-	stringN := fmt.Sprintln(number)
-	var length = len(stringN) - 1
-	stat := int(math.Pow10(length - 1))
-	for length != 0 {
-		if number < 10 {
-			out = append(out, number)
+	length := len(digits)
+	for {
+		if digits[length-1]+1 == 10 {
+			digits[length-1] = 0
+			if length-1 == 0 {
+				output := []int{1}
+				return append(output, digits...)
+			}
+			length--
 		} else {
-			remain := number % stat
-			out = append(out, number/stat)
-			number = remain
+			digits[length-1]++
+			return digits
 		}
-		length--
-	}
-	fmt.Println(out)
-	return out
 
+	}
 }
