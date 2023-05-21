@@ -1,8 +1,6 @@
 package main
 
 func main() {
-	input := 4
-	output := mySqrt(input)
 
 }
 
