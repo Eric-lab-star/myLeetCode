@@ -5,44 +5,32 @@ import (
 )
 
 func main() {
-	a := "111"
-	b := "1"
-	output := addBinary(a, b)
-	fmt.Println(output)
+	ouput := addBinary("111", "1")
+	fmt.Println(ouput)
 }
 
-func addBinary(a string, b string) string {
-	sA := toSlice(a)
-	sB := toSlice(b)
-	extraOne := false
+func addBinary(a, b string) string {
+	if len(a) < len(b) {
+		a, b = b, a
+	}
 
-	for i := len(sA) - 1; i >= 0; i-- {
-		if extraOne && sA[i] == 49 {
-			sA[i] = 48
-		}
-		if sA[i] == 49 && sB[0] == 49 {
-			sA[i] = 48
-			extraOne = true
-		} else if sA[i] == 49 && sB[0] == 48 || sA[i] == 48 && sB[0] == 49 {
-			sA[i] = 49
-		} else {
-			sA[i] = 48
+	indexB := len(b) - 1
+	result := make([]byte, len(a))
+
+	var shifter, sum byte
+	for i := len(a) - 1; i >= 0; i-- {
+		sum = shifter + a[i]
+		if indexB >= 0 {
+			sum += b[indexB]
+			indexB--
 		}
 
+		result[i] = sum%2 + '0'
+		shifter = sum >> 1 % 2
 	}
-	return string(sA)
-
-}
-
-func toSlice(i string) (slice []byte) {
-	for _, v := range i {
-		slice = append(slice, byte(v))
+	if shifter == 0 {
+		return string(result)
 	}
-	return
 
+	return "1" + string(result)
 }
-
-/*
-
-
- */
