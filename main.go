@@ -5,32 +5,20 @@ import (
 )
 
 func main() {
-	ouput := addBinary("111", "1")
-	fmt.Println(ouput)
+	input := []int{11, 14, 2, 7}
+	output := twoSum(input, 9)
+	fmt.Println(output)
 }
 
-func addBinary(a, b string) string {
-	if len(a) < len(b) {
-		a, b = b, a
-	}
-
-	indexB := len(b) - 1
-	result := make([]byte, len(a))
-
-	var shifter, sum byte
-	for i := len(a) - 1; i >= 0; i-- {
-		sum = shifter + a[i]
-		if indexB >= 0 {
-			sum += b[indexB]
-			indexB--
+func twoSum(nums []int, target int) []int {
+	var output []int
+	for i := 0; i < len(nums); i++ {
+		for j := i + 1; j < len(nums); j++ {
+			if nums[i]+nums[j] == target {
+				output := []int{i, j}
+				return output
+			}
 		}
-
-		result[i] = sum%2 + '0'
-		shifter = sum >> 1 % 2
 	}
-	if shifter == 0 {
-		return string(result)
-	}
-
-	return "1" + string(result)
+	return output
 }
